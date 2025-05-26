@@ -5,6 +5,7 @@ use Livewire\Volt\Volt;
 use App\Livewire\SensorTable;
 use App\Livewire\Sensor\Grafik\Index as GrafikIndex;
 use App\Livewire\Grafik\Stat;
+use App\Livewire\Settings\Language\Index as LanguageSettings;
 use App\Models\MqttData;
 use App\Http\Middleware\CheckRole;
 
@@ -23,14 +24,19 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Volt::route('/grafik/stat', Stat::class)->name('grafik.stat');
     Route::view('/grafik', 'sensor.grafik')->name('grafik');
 
+    // ✅ Reset data sensor
     Route::post('/sensor/reset', function () {
         MqttData::truncate();
         return redirect('/sensor')->with('success', 'Data sensor berhasil direset!');
     })->name('sensor.reset');
 
+    // ✅ Manajemen user
     Volt::route('/users', 'users.index');
     Volt::route('/users/create', 'users.create');
     Volt::route('/users/{user}/edit', 'users.edit');
+
+    // ✅ Halaman pengaturan bahasa
+    Volt::route('/settings/language', 'settings.language.index')->name('language.settings');
 });
 
 // ✅ USER AREA (middleware: auth + role:user)
@@ -46,13 +52,13 @@ Route::middleware('auth')->post('/logout', function () {
     return redirect()->route('login');
 })->name('logout');
 
-// ✅ ROUTE GANTI BAHASA (langsung aktif)
+// ✅ ROUTE GANTI BAHASA (aktif langsung, 14 bahasa)
 Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'fr', 'id', 'pt'])) {
-        session()->put('locale', $locale);
-        app()->setLocale($locale); // langsung aktifin
+    if (in_array($locale, ['en', 'id', 'ms', 'fr', 'pt', 'es', 'it', 'de', 'nl', 'zh', 'ja', 'ru', 'ko', 'ar'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
     }
-    return redirect('/'); // hindari redirect ke page expired
+    return redirect()->back();
 })->name('lang.switch');
 
 // ✅ TESTING: akses khusus admin

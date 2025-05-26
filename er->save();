@@ -1,0 +1,11 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6637
+    [34mall[39m: [
+      [34;4mApp\Models\User[39;24m {#6570
+        [34mid[39m: [35m1[39m,
+        [34mname[39m: "[32mAdmin Los Wemos[39m",
+        [34memail[39m: "[32madmin@wemos.com[39m",
+        [34mrole[39m: "[32muser[39m",
+      },
+    ],
+  }
+

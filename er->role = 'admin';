@@ -1,0 +1,48 @@
+[90m= [39m[34;4mApp\Models\User[39;24m {#6554
+    [34mid[39m: [35m3[39m,
+    [34mname[39m: "[32mAdmin Los Wemos[39m",
+    [34memail[39m: "[32madmin@wemos.com[39m",
+    [34mrole[39m: "[32muser[39m",
+    [34memail_verified_at[39m: [36mnull[39m,
+    #[33mpassword[39m: "[32m$2y$12$B1ONvTIUC8pjEDWBRQCHHOzaOXggZft2dT26aOdJHR1FdWYSHBQ2C[39m",
+    #[33mremember_token[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2025-05-21 16:38:34[39m",
+    [34mupdated_at[39m: "[32m2025-05-21 16:38:34[39m",
+  }
+
+[90m= [39m[34;4mApp\Models\User[39;24m {#6603
+    [34mid[39m: [35m1[39m,
+    [34mname[39m: "[32mAdmin Los Wemos[39m",
+    [34memail[39m: "[32madmin@wemos.com[39m",
+    [34mrole[39m: "[32muser[39m",
+    [34memail_verified_at[39m: [36mnull[39m,
+    #[33mpassword[39m: "[32m$2y$12$dLUFz3MCnfJjWMcr5AXOoesiHxGD3FtSYuxI88cjUz2HBgN6CtHeW[39m",
+    #[33mremember_token[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2025-05-21 17:16:04[39m",
+    [34mupdated_at[39m: "[32m2025-05-21 17:16:04[39m",
+  }
+
+[90m= [39m[34;4mApp\Models\User[39;24m {#6327
+    [34mid[39m: [35m1[39m,
+    [34mname[39m: "[32mAdmin Los Wemos[39m",
+    [34memail[39m: "[32madmin@wemos.com[39m",
+    [34mrole[39m: "[32muser[39m",
+    [34memail_verified_at[39m: [36mnull[39m,
+    #[33mpassword[39m: "[32m$2y$12$dLUFz3MCnfJjWMcr5AXOoesiHxGD3FtSYuxI88cjUz2HBgN6CtHeW[39m",
+    #[33mremember_token[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2025-05-21 17:16:04[39m",
+    [34mupdated_at[39m: "[32m2025-05-21 17:16:04[39m",
+  }
+
+[90m= [39m[34;4mApp\Models\User[39;24m {#6582
+    [34mid[39m: [35m1[39m,
+    [34mname[39m: "[32mAdmin Los Wemos[39m",
+    [34memail[39m: "[32madmin@wemos.com[39m",
+    [34mrole[39m: "[32muser[39m",
+    [34memail_verified_at[39m: [36mnull[39m,
+    #[33mpassword[39m: "[32m$2y$12$dLUFz3MCnfJjWMcr5AXOoesiHxGD3FtSYuxI88cjUz2HBgN6CtHeW[39m",
+    #[33mremember_token[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2025-05-21 17:16:04[39m",
+    [34mupdated_at[39m: "[32m2025-05-21 17:16:04[39m",
+  }
+

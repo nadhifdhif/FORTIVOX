@@ -31,35 +31,45 @@ class MqttListener extends Command
 
             $data = json_decode($message, true);
 
-            if (json_last_error() === JSON_ERROR_NONE) {
-                // Isi default untuk gas kalau tidak dikirim
-                $data['gas'] = $data['gas'] ?? 0;
+            // 🔍 Jika data dibungkus dalam key "data", ambil isinya
+            if (isset($data['data']) && is_array($data['data'])) {
+                $data = $data['data'];
+            }
 
-                if (
-                    isset(
-                        $data['temperature'],
-                        $data['humidity'],
-                        $data['alert'],
-                        $data['overheat'],
-                        $data['smoke']
-                    )
-                ) {
+            if (json_last_error() === JSON_ERROR_NONE) {
+
+                // Cek minimal field
+                if (isset($data['temperature'], $data['humidity'])) {
+
+                    // Set default value jika tidak dikirim
+                    $data['alert']     = $data['alert']     ?? 0;
+                    $data['overheat']  = $data['overheat']  ?? 0;
+                    $data['smoke']     = $data['smoke']     ?? 0;
+                    $data['gas']       = $data['gas']       ?? 0;
+
                     $shouldFanOn = $data['temperature'] > 30 || $data['gas'] > 400;
 
-                    MqttData::create([
-                        'temperature' => $data['temperature'],
-                        'humidity'    => $data['humidity'],
-                        'alert'       => $data['alert'],
-                        'overheat'    => $data['overheat'],
-                        'fan'         => $shouldFanOn ? 1 : 0,
-                        'smoke'       => $data['smoke'],
-                        'gas'         => $data['gas'],
-                    ]);
+                    try {
+                        MqttData::create([
+                            'temperature' => $data['temperature'],
+                            'humidity'    => $data['humidity'],
+                            'alert'       => $data['alert'],
+                            'overheat'    => $data['overheat'],
+                            'fan'         => $shouldFanOn ? 1 : 0,
+                            'smoke'       => $data['smoke'],
+                            'gas'         => $data['gas'],
+                        ]);
 
-                    $this->info("✅ Data berhasil disimpan ke database. Fan status: " . ($shouldFanOn ? 'ON' : 'OFF'));
+                        $this->info("✅ Data berhasil disimpan ke database. Fan status: " . ($shouldFanOn ? 'ON' : 'OFF'));
+
+                    } catch (\Exception $e) {
+                        $this->error("❌ Gagal simpan ke DB: " . $e->getMessage());
+                    }
+
                 } else {
-                    $this->error("❌ Field utama (temperature, humidity, dll) masih ada yang kurang.");
+                    $this->error("❌ Field minimal (temperature, humidity) tidak ditemukan.");
                 }
+
             } else {
                 $this->error("❌ Format JSON invalid!");
             }

@@ -3,27 +3,26 @@
     <!-- Header -->
     <x-card class="text-center animate-fade-in">
         <x-header
-            title="Suivi Graphique"
-            subtitle="Visualisez les relevés de température et d’humidité en temps réel. Mise à jour toutes les 1 minute."
+            :title="__('messages.graph_monitoring')"
             align="center"
         />
     </x-card>
 
-    <!-- Onglets -->
+    <!-- Tabs -->
     <x-tabs class="w-full animate-fade-in" wire:ignore>
-        <x-tab label="Température" active>
+        <x-tab :label="__('messages.temperature_title')" active>
             <div class="w-full h-96">
                 <canvas id="chartTemperature" width="400" height="300"></canvas>
             </div>
         </x-tab>
 
-        <x-tab label="Humidité">
+        <x-tab :label="__('messages.humidity_title')">
             <div class="w-full h-96">
                 <canvas id="chartHumidity" width="400" height="300"></canvas>
             </div>
         </x-tab>
 
-        <x-tab label="Mixte">
+        <x-tab :label="__('messages.graph_click')">
             <div class="w-full h-96">
                 <canvas id="chartCombined" width="400" height="300"></canvas>
             </div>
@@ -51,7 +50,7 @@
             .then(data => {
                 const labels = data.map(item => {
                     const date = new Date(item.created_at);
-                    return date.toLocaleTimeString('fr-FR', {
+                    return date.toLocaleTimeString('{{ app()->getLocale() }}', {
                         hour: '2-digit',
                         minute: '2-digit',
                         second: '2-digit',
@@ -62,7 +61,6 @@
                 const temperatures = data.map(i => i.temperature).reverse();
                 const humidities = data.map(i => i.humidity).reverse();
 
-                // Clear chart sebelum redraw
                 chartTemperature?.destroy();
                 chartHumidity?.destroy();
                 chartCombined?.destroy();
@@ -82,7 +80,7 @@
                         data: {
                             labels,
                             datasets: [{
-                                label: 'Température (°C)',
+                                label: '{{ __("messages.temperature_title") }} (°C)',
                                 data: temperatures,
                                 backgroundColor: 'rgba(59, 130, 246, 0.2)',
                                 borderColor: 'rgba(59, 130, 246, 1)',
@@ -100,7 +98,7 @@
                         data: {
                             labels,
                             datasets: [{
-                                label: 'Humidité (%)',
+                                label: '{{ __("messages.humidity_title") }} (%)',
                                 data: humidities,
                                 backgroundColor: 'rgba(16, 185, 129, 0.2)',
                                 borderColor: 'rgba(16, 185, 129, 1)',
@@ -119,14 +117,14 @@
                             labels,
                             datasets: [
                                 {
-                                    label: 'Température (°C)',
+                                    label: '{{ __("messages.temperature_title") }} (°C)',
                                     data: temperatures,
                                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                                     borderColor: 'rgba(59, 130, 246, 1)',
                                     ...commonOpts
                                 },
                                 {
-                                    label: 'Humidité (%)',
+                                    label: '{{ __("messages.humidity_title") }} (%)',
                                     data: humidities,
                                     backgroundColor: 'rgba(16, 185, 129, 0.2)',
                                     borderColor: 'rgba(16, 185, 129, 1)',
@@ -138,7 +136,7 @@
                     }
                 );
             })
-            .catch(e => console.error("Erreur lors de la récupération des données:", e));
+            .catch(e => console.error("Error while fetching sensor data:", e));
     }
 
     // Auto-refresh setiap 1 menit

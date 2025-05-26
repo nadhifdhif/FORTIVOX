@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('mqtt_data', function (Blueprint $table) {
             $table->id();
-            $table->float('temperature'); // Suhu
-            $table->float('humidity');    // Kelembapan
-            $table->boolean('alert');     // 0 = aman, 1 = gas terdeteksi
-            $table->boolean('overheat');  // 0 = suhu normal, 1 = panas
-            $table->boolean('fan');       // 0 = kipas mati, 1 = nyala
-            $table->boolean('smoke');     // 0 = tidak ada asap, 1 = ada asap
-            $table->timestamps();         // created_at & updated_at
+            $table->float('temperature')->nullable();
+            $table->float('humidity')->nullable();
+            $table->float('gas')->default(0);
+            $table->integer('alert')->default(0);
+            $table->integer('overheat')->default(0);
+            $table->integer('fan')->default(0);
+            $table->integer('smoke')->default(0);
+
+            $table->timestamps();
         });
     }
 

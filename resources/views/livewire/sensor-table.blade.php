@@ -3,9 +3,9 @@
 
         <!-- Header -->
         <div class="text-center space-y-2 mb-6">
-            <h1 class="text-4xl font-bold">Suivi Intelligent de l’Environnement</h1>
+            <h1 class="text-4xl font-bold">{{ __('messages.smart_monitoring') }}</h1>
             <p class="text-gray-500">
-                Tout ce que vos capteurs racontent, en un clin d’œil.
+                {{ __('messages.sensor_desc') }}
             </p>
         </div>
 
@@ -16,7 +16,7 @@
                 icon="o-arrow-uturn-left" 
                 wire:click="$set('showConfirmModal', true)"
             >
-            Réinitialiser les données
+            {{ __('messages.reset_data') }}
             </x-button>
         </div>
 
@@ -26,9 +26,9 @@
                 <thead class="bg-blue-100 text-blue-800">
                     <tr>
                         <th class="py-3 px-4 text-center">ID</th>
-                        <th class="py-3 px-4 text-center">Température (°C)</th>
-                        <th class="py-3 px-4 text-center">Humidité (%)</th>
-                        <th class="py-3 px-4 text-center">Horodatage (UTC+7)</th>
+                        <th class="py-3 px-4 text-center">{{ __('messages.temperature_title') }} (°C)</th>
+                        <th class="py-3 px-4 text-center">{{ __('messages.humidity_title') }} (%)</th>
+                        <th class="py-3 px-4 text-center">Timestamp (UTC+7)</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -54,19 +54,19 @@
     <!-- Modal Konfirmasi Reset -->
     <x-modal wire:model.defer="showConfirmModal" blur>
         <div class="p-6">
-            <h2 class="text-xl font-semibold mb-4">Confirmation de la réinitialisation</h2>
+            <h2 class="text-xl font-semibold mb-4">{{ __('messages.reset_confirmation_title') }}</h2>
             <p class="text-gray-600 mb-6">
-                Êtes-vous sûr de vouloir supprimer toutes les données du capteur ?
+                {{ __('messages.reset_confirmation_message') }}
             </p>
             <div class="flex justify-end gap-2">
                 <x-button
                     flat
-                    label="Annuler"
+                    :label="__('messages.cancel')"
                     wire:click="$set('showConfirmModal', false)"
                 />
                 <x-button
                     color="destructive"
-                    label="Réinitialiser maintenant"
+                    :label="__('messages.reset_now')"
                     wire:click="resetSensor"
                     spinner
                 />

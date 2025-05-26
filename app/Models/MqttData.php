@@ -15,6 +15,7 @@ class MqttData extends Model
         'overheat',
         'fan',
         'smoke',
+        'gas', // ← INI WAJIB DITAMBAH!
     ];
 
     public $timestamps = true;

@@ -1,16 +1,16 @@
 <div class="p-6 space-y-6">
 
     <x-header 
-        title="Suivi Graphique" 
-        subtitle="Surveillez les données de température et d'humidité en temps réel. Les données sont mises à jour toutes les minutes." 
+        title="Graph Monitoring" 
+        subtitle="View temperature and humidity logs in real time. Updated every 1 minute." 
         align="center"
     />
 
     <x-card>
         <x-tabs>
             <x-tab-list>
-                <x-tab>Température</x-tab>
-                <x-tab>Humidité</x-tab>
+                <x-tab>Temperature</x-tab>
+                <x-tab>Humidity</x-tab>
                 <x-tab>Mixte</x-tab>
             </x-tab-list>
 

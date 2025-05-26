@@ -8,6 +8,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css" />
 </head>
 <body class="min-h-screen font-sans antialiased bg-base-200">
 
@@ -43,7 +44,7 @@
                         <x-slot:actions>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-ghost btn-xs" title="Log Out">
+                                <button type="submit" class="btn btn-ghost btn-xs" title="{{ __('messages.logout') }}">
                                     <x-icon name="o-power" />
                                 </button>
                             </form>
@@ -54,40 +55,32 @@
 
                     {{-- MENU ADMIN --}}
                     @if($user->role === 'admin')
-                        <x-menu-item title="Page d'accueil" icon="o-home-modern" link="/" />
-                        <x-menu-item title="Suivi en temps réel" icon="o-clipboard-document-check" link="/sensor" />
-                        <x-menu-sub title="Graphique" icon="o-arrow-trending-up">
-                            <x-menu-item title="Température et humidité" icon="o-presentation-chart-line" link="/grafik-monitoring" />
-                            <x-menu-item title="Statistique" icon="o-presentation-chart-bar" link="/grafik/stat" />
+                        <x-menu-item :title="__('messages.homepage')" icon="o-rectangle-stack" link="/" />
+                        <x-menu-item :title="__('messages.realtime_monitoring')" icon="o-command-line" link="/sensor" />
+                        <x-menu-sub :title="__('messages.graph')" icon="o-clipboard-document-list">
+                            <x-menu-item :title="__('messages.temperature_humidity')" icon="o-presentation-chart-line" link="/grafik-monitoring" />
+                            <x-menu-item :title="__('messages.statistics')" icon="o-presentation-chart-bar" link="/grafik/stat" />
                         </x-menu-sub>
-                        <x-menu-sub title="Paramètres" icon="o-wrench-screwdriver">
-                            <x-menu-item title="Themè" icon="o-moon" link="####" />
-                            <x-menu-item title="Langue" icon="o-language" link="####" />
+                        <x-menu-sub :title="__('messages.settings')" icon="o-wrench-screwdriver">
+                            <x-menu-item :title="__('messages.theme')" icon="o-moon" link="####" />
+                            <x-menu-item :title="__('messages.language')" icon="o-language" link="{{ route('language.settings') }}" />
                         </x-menu-sub>
-                        <x-menu-item title="Utilisateurs" icon="o-user-group" link="/users" />
+                        <x-menu-item :title="__('messages.users')" icon="o-user-group" link="/users" />
 
-                    {{-- MENU USER BIASA --}}
+                    {{-- MENU USER --}}
                     @elseif($user->role === 'user')
-                        <x-menu-item title="Page d'accueil" icon="o-home" link="/user-dashboard" />
-                        <x-menu-item title="Suivi en temps réel" icon="o-document" link="/sensor" />
-                        <x-menu-sub title="Graphique" icon="o-arrow-trending-up">
-                            <x-menu-item title="Température et humidité" icon="o-archive-box" link="/grafik-monitoring" />
-                            <x-menu-item title="Statistique" icon="o-document" link="/grafik/stat" />
+                        <x-menu-item :title="__('messages.homepage')" icon="o-home" link="/user-dashboard" />
+                        <x-menu-item :title="__('messages.realtime_monitoring')" icon="o-document" link="/sensor" />
+                        <x-menu-sub :title="__('messages.graph')" icon="o-arrow-trending-up">
+                            <x-menu-item :title="__('messages.temperature_humidity')" icon="o-archive-box" link="/grafik-monitoring" />
+                            <x-menu-item :title="__('messages.statistics')" icon="o-document" link="/grafik/stat" />
                         </x-menu-sub>
-                        <x-menu-sub title="Paramètres" icon="o-cog-6-tooth">
-                            <x-menu-item title="Themè" icon="o-cog-6-tooth" link="####" />
-                            <x-menu-item title="Langue" icon="o-document" link="####" />
+                        <x-menu-sub :title="__('messages.settings')" icon="o-cog-6-tooth">
+                            <x-menu-item :title="__('messages.theme')" icon="o-cog-6-tooth" link="####" />
+                            <x-menu-item :title="__('messages.language')" icon="o-document" link="{{ route('language.settings') }}" />
                         </x-menu-sub>
                     @endif
                 @endif
-
-                {{-- LOGOUT TEST BUTTON (native, di bawah menu) --}}
-                <div class="px-5 pt-3">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-sm btn-error w-full">Test Native Logout</button>
-                    </form>
-                </div>
             </x-menu>
         </x-slot:sidebar>
 
@@ -97,7 +90,7 @@
         </x-slot:content>
     </x-main>
 
-    {{--  TOAST area --}}
+    {{-- TOAST area --}}
     <x-toast />
 </body>
 </html>

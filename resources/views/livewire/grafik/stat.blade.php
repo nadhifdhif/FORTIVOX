@@ -1,24 +1,24 @@
 <div class="p-4">
-    <h2 class="text-2xl font-bold mb-6 text-center">Résumé des statistiques des capteurs</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">{{ __('messages.summary_title') }}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <x-card>
             <div class="text-center">
-                <h3 class="text-lg font-semibold mb-2">Température moyenne</h3>
+                <h3 class="text-lg font-semibold mb-2">{{ __('messages.avg_temp') }}</h3>
                 <p class="text-3xl font-bold">{{ $avgTemp }}°C</p>
             </div>
         </x-card>
 
         <x-card>
             <div class="text-center">
-                <h3 class="text-lg font-semibold mb-2">Humidité moyenne</h3>
+                <h3 class="text-lg font-semibold mb-2">{{ __('messages.avg_humid') }}</h3>
                 <p class="text-3xl font-bold">{{ $avgHumidity }}%</p>
             </div>
         </x-card>
 
         <x-card>
             <div class="text-center">
-                <h3 class="text-lg font-semibold mb-2">Total d'alertes actives</h3>
+                <h3 class="text-lg font-semibold mb-2">{{ __('messages.total_alert') }}</h3>
                 <p class="text-3xl font-bold text-red-600">{{ $totalAlert }}</p>
             </div>
         </x-card>
@@ -31,9 +31,9 @@
             this.chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Température', 'Humidité', 'Alertes'],
+                    labels: ['{{ __("messages.temperature_title") }}', '{{ __("messages.humidity_title") }}', '{{ __("messages.total_alert") }}'],
                     datasets: [{
-                        label: 'Statistiques des capteurs',
+                        label: '{{ __("messages.summary_title") }}',
                         data: [{{ $avgTemp }}, {{ $avgHumidity }}, {{ $totalAlert }}],
                         backgroundColor: ['#60a5fa', '#34d399', '#f87171'],
                     }]
