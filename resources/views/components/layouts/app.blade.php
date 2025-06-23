@@ -64,6 +64,7 @@
                         <x-menu-sub :title="__('messages.settings')" icon="o-wrench-screwdriver">
                             <x-menu-item :title="__('messages.language')" icon="o-language" link="{{ route('language.settings') }}" />
                         </x-menu-sub>
+                        <x-menu-item :title="__('messages.users')" icon="o-user-group" link="/users" />
 
                     {{-- MENU USER --}}
                     @elseif($user->role === 'user')
