@@ -23,25 +23,28 @@ new class extends Component {
 
     #[Computed]
     function shouldActivateFan() {
-        return $this->temperature() > 29 || $this->gas() > 400;
+    return $this->temperature() > 29 || $this->gas() > 0 || $this->smoke() > 0;
     }
+
 
     #[Computed]
     function roomStatus() {
-        return $this->shouldActivateFan()
-            ? __('messages.room_hot')
-            : __('messages.room_normal');
+    return $this->temperature() > 29
+        ? __('messages.room_hot')
+        : __('messages.room_normal');
     }
+
 
     #[Computed]
     function roomStatusColor() {
-        return $this->shouldActivateFan() ? 'text-red-600' : 'text-green-600';
+    return $this->temperature() > 29 ? 'text-red-600' : 'text-green-600';
     }
 
     #[Computed]
     function roomStatusBg() {
-        return $this->shouldActivateFan() ? 'bg-red-200' : 'bg-green-200';
+    return $this->temperature() > 29 ? 'bg-red-200' : 'bg-green-200';
     }
+
 
     #[Computed]
     function tempColor() {
@@ -64,12 +67,12 @@ new class extends Component {
 
     #[Computed]
     function gasColor() {
-        return $this->gas() > 400 ? 'text-red-600' : 'text-green-600';
+        return $this->gas() > 0 ? 'text-red-600' : 'text-green-600';
     }
 
     #[Computed]
     function gasBackground() {
-        return $this->gas() > 400 ? 'bg-red-200' : 'bg-green-200';
+        return $this->gas() > 0 ? 'bg-red-200' : 'bg-green-200';
     }
 
     #[Computed]
@@ -91,70 +94,73 @@ new class extends Component {
 };
 ?>
 
-<div wire:poll.300ms>
-    <div class="w-full text-center my-0.5">
-        <h1 class="text-2xl font-bold font-sans">{{ __('messages.greeting') }}</h1>
-    </div>
+<div>
 
-    <x-card>
-        <x-slot name="title">
-            <span class="text-2xl font-bold font-sans">{{ __('messages.welcome_title') }}</span>
-        </x-slot>
-        <p class="text-base text-gray-600 font-sans">
-            {{ __('messages.welcome_desc') }}
-        </p>
-    </x-card>
-
-    <br>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 rounded-lg {{ $this->gasBackground() }}">
-            <x-stat
-                :title="__('messages.gas_title')"
-                :value="$this->gas() > 400 ? __('messages.gas_detected') : __('messages.no_gas')"
-                icon="o-rss"
-                :color="$this->gasColor()" />
+    <div wire:poll.300ms>
+        <div class="w-full text-center my-0.5">
+            <h1 class="text-2xl font-bold font-sans">{{ __('messages.greeting') }}</h1>
         </div>
 
-        <div class="p-4 rounded-lg {{ $this->roomStatusBg() }}">
-            <x-stat
-                :title="__('messages.room_status_title')"
-                :value="$this->roomStatus()"
-                icon="lucide.sun"
-                :color="$this->roomStatusColor()" />
-        </div>
+        <x-card>
+            <x-slot name="title">
+                <span class="text-2xl font-bold font-sans">{{ __('messages.welcome_title') }}</span>
+            </x-slot>
+            <p class="text-base text-gray-600 font-sans">
+                {{ __('messages.welcome_desc') }}
+            </p>
+        </x-card>
 
-        <div>
-            <x-stat
-                :title="__('messages.temperature_title')"
-                :description="__('messages.temperature_desc')"
-                :value="$this->temperature() . '°C'"
-                icon="lucide.thermometer"
-                :color="$this->tempColor()" />
-        </div>
+        <br>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-lg {{ $this->gasBackground() }}">
+                <x-stat
+                    :title="__('messages.gas_title')"
+                    :value="$this->gas() > 0 ? __('messages.gas_detected') : __('messages.no_gas')"
+                    icon="o-rss"
+                    :color="$this->gasColor()" />
+            </div>
 
-        <div>
-            <x-stat
-                :title="__('messages.humidity_title')"
-                :description="__('messages.humidity_desc')"
-                :value="$this->humidity() . '%'"
-                icon="lucide.droplet"
-                :color="$this->humidColor()" />
-        </div>
+            <div class="p-4 rounded-lg {{ $this->roomStatusBg() }}">
+                <x-stat
+                    :title="__('messages.room_status_title')"
+                    :value="$this->roomStatus()"
+                    icon="lucide.sun"
+                    :color="$this->roomStatusColor()" />
+            </div>
 
-        <div class="p-4 rounded-lg {{ $this->smoke() > 200 ? 'bg-red-200' : 'bg-green-200' }}">
-            <x-stat
-                :title="__('messages.smoke_title')"
-                :value="$this->smoke() > 200 ? __('messages.smoke_detected') : __('messages.no_smoke')"
-                icon="o-cloud"
-                :color="$this->smoke() > 200 ? 'text-red-600' : 'text-green-600'" />
-        </div>
+            <div>
+                <x-stat
+                    :title="__('messages.temperature_title')"
+                    :description="__('messages.temperature_desc')"
+                    :value="$this->temperature() . '°C'"
+                    icon="lucide.thermometer"
+                    :color="$this->tempColor()" />
+            </div>
 
-        <div class="p-4 rounded-lg {{ $this->fanBackground() }}">
-            <x-stat
-                :title="__('messages.fan_title')"
-                :value="$this->fanStatusValue()"
-                icon="lucide.fan"
-                :color="$this->fanStatusColor()" />
+            <div>
+                <x-stat
+                    :title="__('messages.humidity_title')"
+                    :description="__('messages.humidity_desc')"
+                    :value="$this->humidity() . '%'"
+                    icon="lucide.droplet"
+                    :color="$this->humidColor()" />
+            </div>
+
+            <div class="p-4 rounded-lg {{ $this->smoke() > 0 ? 'bg-red-200' : 'bg-green-200' }}">
+                <x-stat
+                    :title="__('messages.smoke_title')"
+                    :value="$this->smoke() > 0 ? __('messages.smoke_detected') : __('messages.no_smoke')"
+                    icon="o-cloud"
+                    :color="$this->smoke() > 0 ? 'text-red-600' : 'text-green-600'" />
+            </div>
+
+            <div class="p-4 rounded-lg {{ $this->fanBackground() }}">
+                <x-stat
+                    :title="__('messages.fan_title')"
+                    :value="$this->fanStatusValue()"
+                    icon="lucide.fan"
+                    :color="$this->fanStatusColor()" />
+            </div>
         </div>
     </div>
 </div>

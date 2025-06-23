@@ -14,8 +14,8 @@ return [
     'logout' => 'Keluar',
 
     // Halaman Utama
-    'greeting' => 'Halo, Administrator.',
-    'welcome_title' => 'Selamat datang di Los Wemos Arduinos!',
+    'greeting' => 'Halo!',
+    'welcome_title' => 'Selamat datang di Fortivox.',
     'welcome_desc' => 'Untuk melihat data suhu dan kelembapan, silakan pilih menu "Monitoring Realtime", dan untuk melihat grafik, pilih menu "Grafik".',
 
     'gas_title' => 'Deteksi Gas',

@@ -15,7 +15,7 @@ return [
 
     // ホーム画面
     'greeting' => 'こんにちは、管理者。',
-    'welcome_title' => 'Los Wemos Arduinos へようこそ！',
+    'welcome_title' => 'Fortivox へようこそ！',
     'welcome_desc' => '温度と湿度の記録を見るには「リアルタイム監視」メニューを選択し、グラフを見るには「グラフ」メニューを選択してください。',
 
     'gas_title' => 'ガス検知',

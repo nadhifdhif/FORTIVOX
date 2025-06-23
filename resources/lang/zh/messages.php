@@ -15,7 +15,7 @@ return [
 
     // 首页
     'greeting' => '您好，管理员。',
-    'welcome_title' => '欢迎使用 Los Wemos Arduinos！',
+    'welcome_title' => '欢迎使用 Fortivox！',
     'welcome_desc' => '要查看温度和湿度记录，请选择“实时监控”菜单；要查看图表，请选择“图表”菜单。',
 
     'gas_title' => '气体检测',

@@ -14,8 +14,8 @@ return [
     'logout' => 'Cerrar sesión',
 
     // Página Principal
-    'greeting' => 'Hola, Administrador.',
-    'welcome_title' => '¡Bienvenido a Los Wemos Arduinos!',
+    'greeting' => '¡Hola!',
+    'welcome_title' => 'Bienvenido a Fortivox.',
     'welcome_desc' => 'Para ver los registros de temperatura y humedad, selecciona el menú "Monitoreo en Tiempo Real". Para ver los gráficos, selecciona el menú "Gráfico".',
 
     'gas_title' => 'Detección de Gas',

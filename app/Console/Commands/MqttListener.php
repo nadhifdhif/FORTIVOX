@@ -10,7 +10,7 @@ use App\Models\MqttData;
 class MqttListener extends Command
 {
     protected $signature = 'mqtt:listen';
-    protected $description = 'Listen to MQTT topic and save sensor data from ESP8266';
+    protected $description = 'Listen to MQTT topic and save sensor data from ESP32';
 
     public function handle()
     {
@@ -22,7 +22,7 @@ class MqttListener extends Command
         $mqtt = new MqttClient($server, $port, $clientId);
         $mqtt->connect($connectionSettings, true);
 
-        $topic = 'nadhif/LOS_WEMOS_ARDUINOS/data';
+        $topic = 'nadhif/FORTIVOX/data';
 
         $this->info('🚀 Sedang mendengarkan topic MQTT: ' . $topic);
 
@@ -47,7 +47,7 @@ class MqttListener extends Command
                     $data['smoke']     = $data['smoke']     ?? 0;
                     $data['gas']       = $data['gas']       ?? 0;
 
-                    $shouldFanOn = $data['temperature'] > 30 || $data['gas'] > 400;
+                    $shouldFanOn = $data['temperature'] > 30 || $data['gas'] > 0 || $data['smoke'] > 0;
 
                     try {
                         MqttData::create([

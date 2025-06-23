@@ -6,45 +6,67 @@ use App\Livewire\SensorTable;
 use App\Livewire\Sensor\Grafik\Index as GrafikIndex;
 use App\Livewire\Grafik\Stat;
 use App\Livewire\Settings\Language\Index as LanguageSettings;
+use App\Livewire\Users\Index as UsersIndex; // ✅ Tambahan penting
 use App\Models\MqttData;
 use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\SetLocale;
+use App\Http\Controllers\LanguageController;
 
-// ✅ Route login & register (public)
+//
+// ============================
+// ✅ PUBLIC ROUTES (Tanpa login)
+// ============================
+//
 Volt::route('/login', 'login')->name('login');
 Volt::route('/register', 'register')->name('register');
-
-// ✅ Route publik untuk grafik ambil data via JS (MQTT)
 Route::get('/sensor-json', fn () => MqttData::latest()->get())->name('sensor.json');
 
-// ✅ ADMIN AREA (middleware: auth + role:admin)
-Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
-    Volt::route('/', 'homepage.index');
+//
+// ============================
+// ✅ SHARED ROUTES (USER + ADMIN)
+// ============================
+//
+Route::middleware(['auth', SetLocale::class])->group(function () {
+    // Dashboard user
+    Volt::route('/user-dashboard', 'user.dashboard');
+
+    // Monitoring
     Volt::route('/sensor', SensorTable::class);
-    Volt::route('/grafik-monitoring', GrafikIndex::class)->name('grafik.monitoring');
-    Volt::route('/grafik/stat', Stat::class)->name('grafik.stat');
+
+    // Menu grafik & statistik
+    Volt::route('/monitoring', GrafikIndex::class)->name('monitoring');
+    Volt::route('/graph/stat', Stat::class)->name('graph.stat');
     Route::view('/grafik', 'sensor.grafik')->name('grafik');
 
-    // ✅ Reset data sensor
+    // Pengaturan bahasa
+    Route::get('/settings/language', LanguageSettings::class)->name('language.settings');
+});
+
+//
+// ============================
+// ✅ ADMIN AREA (khusus role:admin)
+// ============================
+//
+Route::middleware(['auth', CheckRole::class . ':admin', SetLocale::class])->group(function () {
+    Volt::route('/', 'homepage.index');
+
+    // Reset data sensor
     Route::post('/sensor/reset', function () {
         MqttData::truncate();
         return redirect('/sensor')->with('success', 'Data sensor berhasil direset!');
     })->name('sensor.reset');
 
-    // ✅ Manajemen user
-    Volt::route('/users', 'users.index');
+    // Manajemen user
+    Route::get('/users', UsersIndex::class); // ✅ Pakai komponen Livewire class
     Volt::route('/users/create', 'users.create');
     Volt::route('/users/{user}/edit', 'users.edit');
-
-    // ✅ Halaman pengaturan bahasa
-    Volt::route('/settings/language', 'settings.language.index')->name('language.settings');
 });
 
-// ✅ USER AREA (middleware: auth + role:user)
-Route::middleware(['auth', CheckRole::class . ':user'])->group(function () {
-    Volt::route('/user-dashboard', 'user.dashboard');
-});
-
-// ✅ LOGOUT (via POST, aman dari page expired)
+//
+// ============================
+// ✅ LOGOUT & GANTI BAHASA
+// ============================
+//
 Route::middleware('auth')->post('/logout', function () {
     auth()->logout();
     request()->session()->invalidate();
@@ -52,16 +74,13 @@ Route::middleware('auth')->post('/logout', function () {
     return redirect()->route('login');
 })->name('logout');
 
-// ✅ ROUTE GANTI BAHASA (aktif langsung, 14 bahasa)
-Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'id', 'ms', 'fr', 'pt', 'es', 'it', 'de', 'nl', 'zh', 'ja', 'ru', 'ko', 'ar'])) {
-        session(['locale' => $locale]);
-        app()->setLocale($locale);
-    }
-    return redirect()->back();
-})->name('lang.switch');
+Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
-// ✅ TESTING: akses khusus admin
+//
+// ============================
+// ✅ TESTING / DEBUG ROUTE
+// ============================
+//
 Route::middleware([CheckRole::class . ':admin'])->get('/coba-role', function () {
     return 'akses admin berhasil';
 });

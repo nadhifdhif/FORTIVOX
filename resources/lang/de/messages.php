@@ -10,7 +10,7 @@ return [
     'language' => 'Sprachen',
     'users' => 'Benutzer',
     'greeting' => 'Hallo, Administrator.',
-    'welcome_title' => 'Willkommen bei Los Wemos Arduinos!',
+    'welcome_title' => 'Willkommen bei Fortivox!',
     'welcome_desc' => 'Um Temperatur- und Feuchtigkeitsdaten anzuzeigen, wählen Sie das Menü "Echtzeitüberwachung", und um Diagramme zu sehen, wählen Sie das Menü "Diagramm".',
     'gas_title' => 'Gaserkennung',
     'gas_detected' => 'Gas erkannt!',

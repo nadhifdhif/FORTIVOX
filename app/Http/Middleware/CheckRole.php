@@ -18,7 +18,7 @@ class CheckRole
                 default => strtoupper($role)
             };
 
-            abort(403, "Akses ditolak, Anda bukan $roleText");
+            abort(403, "Access denied, you are not $roleText");
         }
 
         return $next($request);

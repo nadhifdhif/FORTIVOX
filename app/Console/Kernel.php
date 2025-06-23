@@ -13,12 +13,20 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule): void
     {
-        // 
+        // Jadwal tugas artisan (kosong untuk sekarang)
     }
 
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
+
+        // ✅ Tambahkan command Volt secara manual
+        if (class_exists(\Livewire\Volt\Console\MakeCommand::class)) {
+            $this->commands([
+                \Livewire\Volt\Console\MakeCommand::class,
+            ]);
+        }
+
         require base_path('routes/console.php');
     }
 }

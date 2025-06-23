@@ -13,8 +13,8 @@ return [
     'timezone' => 'UTC',
 
     // ✅ Language settings
-    'locale' => env('APP_LOCALE', 'fr'), // default: French
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'), // fallback: English
+    'locale' => env('APP_LOCALE', 'en'), 
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'), 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     'cipher' => 'AES-256-CBC',
@@ -39,7 +39,7 @@ return [
     */
     'providers' => [
 
-        // Laravel Framework Service Providers...
+        // ✅ Laravel Framework Service Providers...
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -65,7 +65,7 @@ return [
 
         // ✅ Third-Party Providers
         Livewire\LivewireServiceProvider::class,
-        Livewire\Volt\VoltServiceProvider::class,
+        Livewire\Volt\VoltServiceProvider::class, // ✅ DITAMBAHKAN DI SINI
         Mary\MaryServiceProvider::class, // ✅ MaryUI
 
         // ✅ Custom Providers

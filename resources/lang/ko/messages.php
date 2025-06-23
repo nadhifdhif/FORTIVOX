@@ -15,7 +15,7 @@ return [
 
     // 홈 페이지
     'greeting' => '안녕하세요, 관리자님.',
-    'welcome_title' => 'Los Wemos Arduinos에 오신 것을 환영합니다!',
+    'welcome_title' => 'Fortivox에 오신 것을 환영합니다!',
     'welcome_desc' => '온도와 습도 데이터를 보려면 "실시간 모니터링" 메뉴를 선택하고, 그래프를 보려면 "그래프" 메뉴를 선택하세요.',
 
     'gas_title' => '가스 감지',

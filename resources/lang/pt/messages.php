@@ -14,8 +14,8 @@ return [
     'logout' => 'Desconexão',
 
     // Página Inicial
-    'greeting' => 'Olá, Administrador.',
-    'welcome_title' => 'Bem-vindo ao Los Wemos Arduinos!',
+    'greeting' => 'Olá!',
+    'welcome_title' => 'Bem-vindo ao Fortivox.',
     'welcome_desc' => 'Para visualizar as leituras de temperatura e umidade, selecione o menu "Monitoramento em Tempo Real" e para ver os gráficos, selecione o menu "Gráfico".',
 
     'gas_title' => 'Detecção de Gás',

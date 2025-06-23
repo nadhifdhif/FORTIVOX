@@ -14,8 +14,8 @@ return [
     'logout' => 'Log Out',
 
     // Home Page
-    'greeting' => 'Hello, Administrator.',
-    'welcome_title' => 'Welcome to Los Wemos Arduinos!',
+    'greeting' => 'Hello!',
+    'welcome_title' => 'Welcome to Fortivox.',
     'welcome_desc' => 'To view temperature and humidity readings, please select the "Realtime Monitoring" menu, and to view the charts, please select the "Graph" menu.',
 
     'gas_title' => 'Gas Detection',

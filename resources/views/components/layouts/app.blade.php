@@ -58,26 +58,24 @@
                         <x-menu-item :title="__('messages.homepage')" icon="o-rectangle-stack" link="/" />
                         <x-menu-item :title="__('messages.realtime_monitoring')" icon="o-command-line" link="/sensor" />
                         <x-menu-sub :title="__('messages.graph')" icon="o-clipboard-document-list">
-                            <x-menu-item :title="__('messages.temperature_humidity')" icon="o-presentation-chart-line" link="/grafik-monitoring" />
-                            <x-menu-item :title="__('messages.statistics')" icon="o-presentation-chart-bar" link="/grafik/stat" />
+                            <x-menu-item :title="__('messages.temperature_humidity')" icon="o-presentation-chart-line" link="/monitoring" />
+                            <x-menu-item :title="__('messages.statistics')" icon="o-presentation-chart-bar" link="/graph/stat" />
                         </x-menu-sub>
                         <x-menu-sub :title="__('messages.settings')" icon="o-wrench-screwdriver">
-                            <x-menu-item :title="__('messages.theme')" icon="o-moon" link="####" />
                             <x-menu-item :title="__('messages.language')" icon="o-language" link="{{ route('language.settings') }}" />
                         </x-menu-sub>
                         <x-menu-item :title="__('messages.users')" icon="o-user-group" link="/users" />
 
                     {{-- MENU USER --}}
                     @elseif($user->role === 'user')
-                        <x-menu-item :title="__('messages.homepage')" icon="o-home" link="/user-dashboard" />
-                        <x-menu-item :title="__('messages.realtime_monitoring')" icon="o-document" link="/sensor" />
-                        <x-menu-sub :title="__('messages.graph')" icon="o-arrow-trending-up">
-                            <x-menu-item :title="__('messages.temperature_humidity')" icon="o-archive-box" link="/grafik-monitoring" />
-                            <x-menu-item :title="__('messages.statistics')" icon="o-document" link="/grafik/stat" />
+                        <x-menu-item :title="__('messages.homepage')" icon="o-rectangle-stack" link="/user-dashboard" />
+                        <x-menu-item :title="__('messages.realtime_monitoring')" icon="o-command-line" link="/sensor" />
+                        <x-menu-sub :title="__('messages.graph')" icon="o-clipboard-document-list">
+                            <x-menu-item :title="__('messages.temperature_humidity')" icon="o-presentation-chart-line" link="/monitoring" />
+                            <x-menu-item :title="__('messages.statistics')" icon="o-presentation-chart-bar" link="/graph/stat" />
                         </x-menu-sub>
-                        <x-menu-sub :title="__('messages.settings')" icon="o-cog-6-tooth">
-                            <x-menu-item :title="__('messages.theme')" icon="o-cog-6-tooth" link="####" />
-                            <x-menu-item :title="__('messages.language')" icon="o-document" link="{{ route('language.settings') }}" />
+                        <x-menu-sub :title="__('messages.settings')" icon="o-wrench-screwdriver">
+                            <x-menu-item :title="__('messages.language')" icon="o-language" link="{{ route('language.settings') }}" />
                         </x-menu-sub>
                     @endif
                 @endif
