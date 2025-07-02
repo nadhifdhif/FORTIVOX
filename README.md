@@ -1,27 +1,19 @@
-## Fortivox
+# Fortivox
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Fortivox** is an IoT-based environmental monitoring system designed to detect **temperature**, **humidity**, and **gas levels** in real-time and display the data via a responsive web dashboard.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The system is powered by an **ESP32** microcontroller and integrates the following key components:
+- **DHT22** sensor for temperature and humidity measurement
+- **MQ-2** and **MQ-135** gas sensors for smoke and harmful gas detection
+- **16x2 I2C LCD** for local display
+- **Relay module** to control a DC fan
+- **Passive buzzer** for warning alerts
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Sensor data is transmitted via the **MQTT protocol** and stored in a **MySQL** database. A Laravel-based web application visualizes the data with:
+- Real-time monitoring dashboard
+- Statistical summaries and bar charts
+- Alert system for unsafe conditions
+- Multilingual support (14 languages including English, Indonesian, French, Japanese, etc.)
 
-## Learning Laravel
+Fortivox is suitable for indoor environments such as **homes, laboratories, or workspaces**, providing improved safety, comfort, and accessibility.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-# NAUFAL-NADHIF-RABBANI-ISKANDAR
