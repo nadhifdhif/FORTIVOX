@@ -4,7 +4,7 @@ return [
     // Sidebar / Navigasi
     'homepage' => 'Beranda',
     'realtime_monitoring' => 'Monitoring Realtime',
-    'graph' => 'Grafik',
+    'graphs' => 'Grafik',
     'temperature_humidity' => 'Suhu dan Kelembapan',
     'statistics' => 'Statistik',
     'settings' => 'Pengaturan',
